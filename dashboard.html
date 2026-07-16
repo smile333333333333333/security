@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>H.E.E. Employee Dashboard</title>
+
+<style>
+body{
+    background:#080808;
+    color:#33ff33;
+    font-family:Consolas, monospace;
+    margin:0;
+}
+
+header{
+    background:#111;
+    padding:20px;
+    border-bottom:2px solid #222;
+}
+
+h1{
+    margin:0;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:40px;
+}
+
+.panel{
+    background:#111;
+    border:1px solid #333;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+a{
+    color:#55ff55;
+    text-decoration:none;
+}
+
+a:hover{
+    color:white;
+}
+
+.notice{
+    color:#ff5555;
+}
+
+#popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    color:red;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    text-align:center;
+    z-index:999;
+}
+
+small{
+    color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>H.E.E. EMPLOYEE NETWORK</h1>
+Employee Access Level: 2
+</header>
+
+<div class="container">
+
+<div class="panel">
+<h2>Available Systems</h2>
+
+<p>▶ <a href="camera.html">Security Camera 01</a></p>
+
+<p>▶ <a href="camera02.html">Security Camera 02</a></p>
+
+<p>▶ <a href="archive.html">Incident Archive</a></p>
+
+<p>▶ Personnel Database <small>(Offline)</small></p>
+
+<p>▶ Maintenance Logs <small>(Restricted)</small></p>
+
+</div>
+
+<div class="panel">
+
+<h2>Daily Notice</h2>
+
+<p class="notice">
+
+Employees are reminded that reports of smiling personnel are considered rumors.
+
+Continue normal duties.
+
+</p>
+
+</div>
+
+<div class="panel">
+
+<h2>Recent Alerts</h2>
+
+<p>
+
+07:12 - Camera 05 Signal Lost
+
+<br>
+
+08:41 - Basement Access Logged
+
+<br>
+
+09:14 - Archive Modified
+
+<br>
+
+09:15 - User Unknown
+
+</p>
+
+</div>
+
+</div>
+
+<div id="popup">
+
+CONNECTION INTERRUPTED
+
+<br><br>
+
+UNKNOWN DEVICE DETECTED
+
+</div>
+
+<script>
+
+// Rare event (15% chance)
+if(Math.random() < 0.15){
+
+setTimeout(function(){
+
+document.getElementById("popup").style.display="flex";
+
+setTimeout(function(){
+
+document.getElementById("popup").style.display="none";
+
+},2500);
+
+},15000);
+
+}
+
+// Small glitch every few seconds
+setInterval(function(){
+
+document.body.style.opacity=".96";
+
+setTimeout(function(){
+
+document.body.style.opacity="1";
+
+},100);
+
+},7000);
+
+</script>
+
+</body>
+</html>
