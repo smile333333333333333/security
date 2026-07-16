@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H.E.E. Security Camera 02</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#00ff66;
+    font-family:Consolas,monospace;
+    overflow:hidden;
+}
+
+#screen{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    background:#1b1b1b;
+}
+
+#hall{
+    position:absolute;
+    left:22%;
+    top:8%;
+    width:56%;
+    height:84%;
+    background:linear-gradient(#444,#222);
+    border-left:8px solid #222;
+    border-right:8px solid #222;
+    transition:.3s;
+}
+
+.door{
+    position:absolute;
+    width:70px;
+    height:130px;
+    background:#222;
+    border:2px solid #111;
+}
+
+#door1{left:5%;top:25%;}
+#door2{right:5%;top:50%;}
+
+#figure{
+    position:absolute;
+    width:35px;
+    height:110px;
+    right:24%;
+    bottom:18%;
+    display:none;
+}
+
+#figure:before{
+    content:"";
+    position:absolute;
+    width:32px;
+    height:32px;
+    background:#ddd;
+    border-radius:50%;
+    top:0;
+    left:2px;
+}
+
+#figure:after{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:6px;
+    border-bottom:2px solid red;
+    left:10px;
+    top:18px;
+}
+
+#body{
+    position:absolute;
+    top:30px;
+    left:10px;
+    width:15px;
+    height:75px;
+    background:#111;
+}
+
+#static{
+    position:absolute;
+    inset:0;
+    background:repeating-linear-gradient(
+        transparent 0px,
+        rgba(255,255,255,.04) 2px,
+        transparent 4px
+    );
+    pointer-events:none;
+    animation:scan .08s linear infinite;
+}
+
+@keyframes scan{
+from{transform:translateY(0);}
+to{transform:translateY(4px);}
+}
+
+#hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+    z-index:10;
+}
+
+#warning{
+    position:absolute;
+    top:45%;
+    width:100%;
+    text-align:center;
+    color:red;
+    font-size:40px;
+   
