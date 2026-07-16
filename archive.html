@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>H.E.E. Internal Archive</title>
+
+<style>
+body{
+    background:#050505;
+    color:#33ff33;
+    font-family:Consolas, monospace;
+    margin:0;
+    padding:40px;
+}
+
+#terminal{
+    max-width:900px;
+    margin:auto;
+    white-space:pre-wrap;
+    line-height:1.5;
+}
+
+.cursor{
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+
+.glitch{
+    color:red;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<!--
+ARCHIVE NOTE:
+Employee 17 never entered the basement.
+The logs insist that he did.
+
+Next access code: 4418
+-->
+
+<script>
+
+const output=document.getElementById("terminal");
+
+const lines=[
+"H.E.E. INTERNAL ARCHIVE",
+"",
+"Authorizing...",
+"",
+"ACCESS LEVEL: 4",
+"",
+"Loading Incident File...",
+"",
+"[█████████████████████]",
+"",
+"INCIDENT REPORT #06",
+"",
+"Date: ██/██/20██",
+"",
+"Personnel Present:",
+"- Dr. Collins",
+"- Officer Hale",
+"- Research Team Delta",
+"",
+"Summary:",
+"",
+"The excavation chamber was opened at 09:14.",
+"",
+"No unusual biological material was recovered.",
+"",
+"...",
+"",
+"That statement has been corrected.",
+"",
+"Three employees disappeared before noon.",
+"",
+"Security cameras remained operational.",
+"",
+"The footage has since been removed.",
+"",
+"Recommendation:",
+"",
+"Do not discuss the smiling personnel.",
+"",
+"Do not acknowledge them.",
+"",
+"Do not follow them.",
+"",
+"END OF FILE."
+];
+
+let i=0;
+
+function type(){
+
+    if(i<lines.length){
+        output.innerHTML+=lines[i]+"<br>";
+        i++;
+        setTimeout(type,350);
+    }else{
+
+        setTimeout(()=>{
+            output.innerHTML+="<br><span class='glitch'>FILE CORRUPTED...</span>";
+        },2000);
+
+        setTimeout(()=>{
+            output.innerHTML+="<br><span class='glitch'>RECOVERING...</span>";
+        },4500);
+
+        setTimeout(()=>{
+            output.innerHTML+="<br><br><span class='glitch'>There is no Incident Report #06.</span>";
+        },7000);
+
+        setTimeout(()=>{
+            document.body.style.background="#100";
+            output.innerHTML+="<br><br><span class='glitch'>Someone changed the archive.</span>";
+        },10000);
+    }
+
+}
+
+type();
+
+</script>
+
+</body>
+</html>
