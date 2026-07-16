@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H.E.E. Security Camera</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    font-family:Consolas, monospace;
+    color:#00ff66;
+    overflow:hidden;
+}
+
+#hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+    z-index:10;
+    text-shadow:0 0 5px #00ff66;
+}
+
+#camera{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    background:
+        radial-gradient(circle at center,#555 0%,#222 45%,#111 100%);
+}
+
+#hallway{
+    position:absolute;
+    left:20%;
+    top:10%;
+    width:60%;
+    height:80%;
+    background:#333;
+    border-left:10px solid #222;
+    border-right:10px solid #222;
+}
+
+#figure{
+    position:absolute;
+    width:45px;
+    height:120px;
+    right:22%;
+    bottom:18%;
+    display:none;
+}
+
+.head{
+    width:36px;
+    height:36px;
+    background:#ddd;
+    border-radius:50%;
+    margin:auto;
+    position:relative;
+}
+
+.head::after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:8px;
+    border-bottom:3px solid red;
+    border-radius:0 0 18px 18px;
+    left:9px;
+    top:18px;
+}
+
+.body{
+    width:20px;
+    height:70px;
+    background:#111;
+    margin:auto;
+}
+
+#static{
+    position:absolute;
+    inset:0;
+    background-image:
+        repeating-linear-gradient(
+            transparent 0px,
+            rgba(255,255,255,.04) 2px,
+            transparent 4px
+        );
+    animation:scan .12s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes scan{
+    from{transform:translateY(0);}
+    to{transform:translateY(4px);}
+}
+
+#timestamp{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    color:#00ff66;
+}
+</style>
+</head>
+
+<body>
+
+<div id="hud">
+<b>H.E.E. SECURITY NETWORK</b><br>
+CAMERA 04 - NORTH HALLWAY
+</div>
+
+<div id="camera">
+
+<div id="hallway"></div>
+
+<div id="figure">
+<div class="head"></div>
+<div class="body"></div>
+</div>
+
+<div id="static"></div>
+
+<div id="timestamp"></div>
+
+</div>
+
+<script>
+
+function updateTime(){
+    document.getElementById("timestamp").textContent=
+    new Date().toLocaleString();
+}
+
+setInterval(updateTime,1000);
+updateTime();
+
+// Figure appears after 25 seconds.
+setTimeout(()=>{
+    document.getElementById("figure").style.display="block";
+},25000);
+
+</script>
+
+</body>
+</html>
