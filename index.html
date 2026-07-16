@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>H.E.E. Secure Terminal</title>
+<style>
+body{margin:0;background:#050505;color:#44ff44;font-family:Consolas,monospace;display:flex;justify-content:center;align-items:center;height:100vh;overflow:hidden}
+body:before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(transparent 0 2px,rgba(255,255,255,.03) 3px 4px);pointer-events:none}
+#box{background:#101010;border:2px solid #2d2d2d;padding:25px;width:420px;box-shadow:0 0 25px rgba(0,255,0,.2)}
+#log{height:120px;white-space:pre-wrap;margin-bottom:15px}
+#keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+button{padding:14px;background:#1d1d1d;color:#6f6;border:1px solid #444;font-size:18px;cursor:pointer}
+#disp{height:40px;border:1px solid #444;display:flex;align-items:center;justify-content:center;margin:10px 0;font-size:24px;letter-spacing:6px}
+.flash{animation:f .15s 6}@keyframes f{50%{background:#300}}
+#msg{margin-top:12px;color:#f66;min-height:20px}
+</style></head><body><div id="box"><div id="log"></div><div id="ui" style="display:none">
+<div>ACCESS CODE REQUIRED</div><div id="disp">----</div><div id="keys"></div><div id="msg"></div></div></div>
+<script>
+const log=document.getElementById('log');const ui=document.getElementById('ui');
+const boot=["H.E.E. INTERNAL TERMINAL","Loading security...OK","Loading archives...OK","Connecting...OK","Awaiting authorization..."];
+let i=0;
+(function b(){if(i<boot.length){log.innerHTML+=boot[i++]+"\n";setTimeout(b,500)}else ui.style.display='block';})();
+let code="";
+const disp=document.getElementById('disp'),msg=document.getElementById('msg');
+function draw(){disp.textContent=code.padEnd(4,'-')}
+draw();
+const keys=document.getElementById('keys');
+["1","2","3","4","5","6","7","8","9","C","0","↵"].forEach(k=>{
+ let bt=document.createElement('button');bt.textContent=k;bt.onclick=()=>{
+ if(k==="C"){code=""}
+ else if(k==="↵"){
+   if(code==="9123"){
+      document.body.innerHTML='<div style="color:#7f7;font-family:Consolas,monospace;text-align:center"><h1>ACCESS GRANTED</h1><p><b>Under the bed is the next clue.</b></p><p>Redirecting to employee dashboard...</p></div>';
+      setTimeout(()=>location.href="dashboard.html",4000);
+      return;
+   } else {
+      msg.textContent="ACCESS DENIED";
+      document.body.classList.add("flash");
+      setTimeout(()=>document.body.classList.remove("flash"),900);
+      code="";
+   }
+ } else if(code.length<4){code+=k}
+ draw();
+ };
+ keys.appendChild(bt);
+});
+setTimeout(()=>{if(ui.style.display!=="none"&&code===""){log.innerHTML+="\nNOTICE: Someone left a note.\n";}},15000);
+setTimeout(()=>{if(ui.style.display!=="none"&&code===""){msg.textContent="...they're still smiling.";msg.style.color="#faa";}},30000);
+</script></body></html>
